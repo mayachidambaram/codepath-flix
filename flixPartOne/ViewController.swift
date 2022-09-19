@@ -52,17 +52,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) ->  Int{
         return movies.count
     }
-    func fetchImage(url: URL, completion: @escaping (UIImage?) -> Void) {
-         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-           if let data = data,
-             let image = UIImage(data: data) {
-             completion(image)
-           } else {
-             completion(nil)
-           }
-         }
-         task.resume()
-       }
+   // func fetchImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+         //let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+          // if let data = data,
+            // let image = UIImage(data: data) {
+            // completion(image)
+          // } else {
+           //  completion(nil)
+          // }
+         //}
+        // task.resume()
+       //}
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieCell
         
@@ -78,19 +78,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let posterPath = movie["poster_path"] as! String
         let posterURL = URL(string: baseUrl + posterPath)!
         
-        //cell.posterView.af.setImage(withURL: posterURL!)
+        cell.posterView.af.setImage(withURL: posterURL)
         
-        fetchImage(url: posterURL) { image in
-              DispatchQueue.main.async {
-                  cell.posterView.image = image
-                }
-            }
+       // fetchImage(url: posterURL) { image in
+              //DispatchQueue.main.async {
+                 // cell.posterView.image = image
+               // }
+           // }
         
         
         
         
         
         return cell
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        
+        
+        //print("Details screen loading")
+        
+        //find selected movie
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let movie = movies[indexPath.row]
+        
+        
+        
+        //pass selected movie to details movie controller
+        let detailsViewController = segue.destination as! MovieDetailsViewController
+        detailsViewController.movie = movie
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     
