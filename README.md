@@ -46,7 +46,7 @@ I mostly had issues with my images showing up in the app, but I was able to get 
 ### App Walkthrough GIF
 `TODO://` Add the URL to your animated app walkthough `gif` in the image tag below, `YOUR_GIF_URL_HERE`. Make sure the gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after after adding gif)
 
-https://imgur.com/a/WWtQ0nO
+https://imgur.com/a/p5EJBAH
 
 ### Notes
 I had issues with creating the proper size of the movie cells, but I was able to resolve that with help from the slack channel.
